@@ -4,21 +4,21 @@ import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import javax.sql.DataSource;
 
-public class GraphQLizeResolver implements GraphQLExecutor {
+public class GraphQLizeResolver implements GraphQLResolver {
   static {
     IFn require = Clojure.var("clojure.core", "require");
     require.invoke(Clojure.read("graphqlize.java-interop"));
   }
   private static final IFn initializeGraphQLizeResolver = Clojure.var("graphqlize.java-interop", "initialize");
-  private final GraphQLExecutor executor;
+  private final GraphQLResolver resolver;
 
   public GraphQLizeResolver(DataSource dataSource) {
-    executor = (GraphQLExecutor) initializeGraphQLizeResolver.invoke(dataSource);
+    resolver = (GraphQLResolver) initializeGraphQLizeResolver.invoke(dataSource);
   }
 
   @Override
-  public String execute(String query) {
-    return executor.execute(query);
+  public String resolve(String query) {
+    return resolver.resolve(query);
   }
 
 }

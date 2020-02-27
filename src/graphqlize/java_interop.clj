@@ -3,14 +3,14 @@
             [clojure.data.json :as json]
             [com.walmartlabs.lacinia :as lacinia]
             [graphqlize.lacinia.core :as gql-lacinia])
-  (:import [org.graphqlize.java GraphQLExecutor]
+  (:import [org.graphqlize.java GraphQLResolver]
            [javax.sql DataSource]))
 
 (defn initialize [^DataSource db-spec]
   (let [db-adapter     (honeyeql.db/initialize db-spec)
         lacinia-schema (gql-lacinia/schema db-adapter)]
-    (reify GraphQLExecutor
-      (execute [_ query]
+    (reify GraphQLResolver
+      (resolve [_ query]
         (json/write-str (lacinia/execute lacinia-schema query nil nil))))))
 
 (comment
@@ -21,5 +21,5 @@
             (.setDatabaseName "sakila")
             (.setUser "postgres")
             (.setPassword "postgress")))
-  (.execute (initialize ds) "query { actorByActorId(actorId : 1) { firstName } }")
-  (def resolver (GraphQLizeResolver. ds)))
+  (def resolver (GraphQLizeResolver. ds))
+  (.resolve resolver "query { actorByActorId(actorId : 1) { firstName } }"))
