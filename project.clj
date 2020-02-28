@@ -1,4 +1,4 @@
-(defproject graphqlize-java "0.1.0-alpha-1"
+(defproject org.graphqlize/graphqlize-java "0.1.0-alpha-1"
   :description "Java wrapper for graphqlize library"
   :url "https://github.com/graphqlize/graphqlize-java"
   :license {:name "EPL-2.0"
