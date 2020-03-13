@@ -3,6 +3,7 @@ package org.graphqlize.java;
 import clojure.java.api.Clojure;
 import clojure.lang.IFn;
 import javax.sql.DataSource;
+import java.util.Map;
 
 public class GraphQLizeResolver implements GraphQLResolver {
   static {
@@ -19,6 +20,11 @@ public class GraphQLizeResolver implements GraphQLResolver {
   @Override
   public String resolve(String query) {
     return resolver.resolve(query);
+  }
+
+  @Override
+  public String resolve(String query, Map<String, Object> variables) {
+    return resolver.resolve(query, variables);
   }
 
 }

@@ -1,6 +1,7 @@
 (ns graphqlize.java-interop
   (:require [clojure.data.json :as json]
             [com.walmartlabs.lacinia :as lacinia]
+            [inflections.core :as inf]
             [graphqlize.lacinia.core :as gql-lacinia])
   (:import [org.graphqlize.java GraphQLResolver]
            [javax.sql DataSource]))
@@ -8,8 +9,11 @@
 (defn initialize [^DataSource db-spec]
   (let [lacinia-schema (gql-lacinia/schema db-spec)]
     (reify GraphQLResolver
-      (resolve [_ query]
-        (json/write-str (lacinia/execute lacinia-schema query nil nil))))))
+      (resolve [this query]
+        (.resolve this query nil))
+      (resolve [_ query variables]
+        (let [vs (inf/transform-keys (into {} variables) keyword)]
+          (json/write-str (lacinia/execute lacinia-schema query vs nil)))))))
 
 (comment
   (import '[org.postgresql.ds PGSimpleDataSource]
