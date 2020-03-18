@@ -4,7 +4,7 @@ It aims to simplify the effort required to expose GraphQL APIs over relational d
 
 > GraphQLize is at its early stages now. The objective of this early release is to get early feedback from the community. **It is not production-ready yet!**
 
-[![Clojars Project](https://img.shields.io/clojars/v/org.graphqlize/graphqlize-java.svg)]  
+![Clojars Project](https://img.shields.io/clojars/v/org.graphqlize/graphqlize-java.svg)  
 
 <a href="https://discord.gg/akkdPqf"><img src="https://img.shields.io/badge/chat-discord-brightgreen.svg?logo=discord&style=flat"></a>
 <a href="https://twitter.com/intent/follow?screen_name=GraphQLize"><img src="https://img.shields.io/badge/Follow-GraphQLize-blue.svg?style=flat&logo=twitter"></a>
